@@ -8,7 +8,10 @@
 		width: auto;
 	}
 	ul {
-		display: none;
+		// display: none;
+		max-height: 0;
+		overflow: hidden;
+		transition: all .8s;
 		li {
 
 		}
@@ -20,6 +23,25 @@
 		padding-left: 12px;
 	}
 	.active { 
-		display: block; 
+		// display: block; 
+		max-height: 500px;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

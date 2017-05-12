@@ -40,7 +40,27 @@ footer {
 
 
 
+.hentries {
+    display: flex;
+    justify-content: space-between;
+    .hentry {
+        display: flex;
+        flex-direction: column;
+        width: 48%;
 
+        .published {
+            font-size: 0.875rem
+        }
+        h4 {
+            font-size: 20px;
+            margin-top:  1rem;
+            margin-bottom: 0;
+        }
+        p {
+            order: 2;
+        }
+    }
+}
 
 
 

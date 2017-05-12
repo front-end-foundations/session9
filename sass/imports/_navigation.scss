@@ -1,7 +1,11 @@
 /* navigation scss */
 
 nav {
-		ul {
+	position: fixed;
+	width: 100%;
+	z-index: 10;
+	ul {
+
 		// display: none;
 		transform: translateY(-200px);
 		max-height: 1px;
