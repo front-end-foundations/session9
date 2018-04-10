@@ -1,0 +1,26 @@
+footer {
+	margin-top: 40px;
+	padding-top: 40px;
+	background: $link;
+	min-height: 320px;
+	.siteinfo {
+		display: grid;
+		grid-template-rows: 3fr 3fr 3fr;
+		padding: 1rem;
+		margin: 0 auto;
+		color: #fff;
+
+		@media (min-width: $break-sm) {
+			grid-template-columns: 6fr 3fr 3fr;
+			grid-column-gap: 2rem;
+			max-width: $max-width;
+		}
+
+		a {
+			color: #fff;
+		}
+		p {
+			margin-top: 0;
+		}
+	}
+}

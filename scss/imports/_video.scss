@@ -1,0 +1,19 @@
+.btn-list {
+	display: flex;
+	padding: 6px;
+	li {
+		margin: 0 18px 16px 0;
+	}
+	.active {
+		background: $link;
+		color: #fff;
+		padding: 0.5rem;
+		border-radius: $radius;
+	}
+}
+
+.content-video {
+	iframe {
+		background: #000;
+	}
+}
