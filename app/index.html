@@ -219,7 +219,7 @@ videoLinks.forEach(videoLink => videoLink.addEventListener('click', selectVideo)
 
 function selectVideo(){
   removeActiveClass();
-  this.classlist.add('active');
+  this.classList.add('active');
   const videoToPlay = this.getAttribute('href');
   iFrame.setAttribute('src', videoToPlay);
   event.preventDefault();
@@ -231,8 +231,6 @@ function removeActiveClass(){
   //   videoLink.classList.remove('active')
   // })
 }
-
-// var videoLinksArray = [...videoLinks];
 
 </script>
 
