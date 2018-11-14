@@ -60,8 +60,7 @@ a:hover {
 
 img,
 iframe {
-  width: 100%;
-  height: auto; }
+  width: 100%; }
 
 p {
   margin: 12px 0; }
@@ -80,7 +79,8 @@ h4 {
 
 nav {
   position: fixed;
-  width: 100%; }
+  width: 100%;
+  z-index: 999999; }
   nav ul {
     transform: translateY(-500px);
     max-height: 1px;
@@ -142,6 +142,8 @@ nav {
 header {
   max-width: 940px;
   padding-top: 3.75rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   margin: 0 auto; }
   header h1 {
     font-size: 3rem;
@@ -171,7 +173,15 @@ header {
     grid-template-columns: 8fr 4fr;
     grid-column-gap: 2rem; } }
 
-header,
+.secondary article {
+  display: flex;
+  flex-direction: column; }
+  .secondary article figure {
+    order: 1; }
+    @media (min-width: 768px) {
+      .secondary article figure {
+        order: 0; } }
+
 section {
   padding: 1rem; }
 

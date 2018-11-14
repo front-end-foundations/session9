@@ -8,7 +8,18 @@
   }
 }
 
-header,
+.secondary article {
+  display: flex;
+  flex-direction: column;
+  figure {
+    order: 1;
+    @media(min-width: $break-med){
+      order: 0;
+    }
+  }
+}
+
+
 section {
   padding: 1rem;
 }
