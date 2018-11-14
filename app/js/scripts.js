@@ -1,11 +1,18 @@
-var log = console.log;
-
 document.addEventListener('click', (e) => {
-	log(event.target)
-	if ( e.target.id == 'pull') {
-		makeHamburgers()
+	// console.log(e.target)
+	if (e.target.id == 'pull') {
+		makeHamburgers(e.target)
 	}
-})
+	else if (e.target.matches('.btn-list a')) {
+		videoSwitcher(e.target)
+	}
+	else if (e.target.matches('.nav-sub > li > a')) {
+		accordion()
+	}
+	else if (e.target.matches('.image-tn img')) {
+		runCarousel(e.target)
+	}
+}, false)
 
 // Functions called elsewhere
 var removeActiveClass = function (elements) {
@@ -21,73 +28,84 @@ var addActiveClass = function (element) {
 // --- DOM Scripts ---- //
 
 // Hamburger
-var makeHamburgers = function () {
+var makeHamburgers = function (elem) {
 	event.preventDefault();
 	var body = document.querySelector('body');
-	body.classList.toggle('show-nav');
-}
-
-
-// Video switcher
-
-var videoSwitcher = function () {
-	const videoLinks = document.querySelectorAll('.content-video a');
-	const iFrame = document.querySelector('iframe')
-	
-	videoLinks.forEach( (videoLink) => {
-		videoLink.addEventListener('click', selectVideo)
-	});
-	
-	function selectVideo() {
-		event.preventDefault();
-		removeActiveClass('.content-video a');
-		addActiveClass(event.target)
-		// log(event.target)
-		const videoToPlay = event.target.getAttribute('href');
-		iFrame.setAttribute('src', videoToPlay);
+	if (body.classList.contains('show-nav')) {
+		body.classList.remove('show-nav');
+	} else {
+		body.classList.add('show-nav');
 	}
 }
 
+// Video switcher
+var videoSwitcher = function (elem) {
+	event.preventDefault();
+	const iFrame = document.querySelector('iframe')
+	removeActiveClass('.content-video a');
+	addActiveClass(event.target)
+	const videoToPlay = event.target.getAttribute('href');
+	iFrame.setAttribute('src', videoToPlay);
+}
 
 // Accordion
 var accordion = function () {
-	const subnavLinks = document.querySelectorAll('.nav-sub > li > a')
-	// log(subnavLinks)
-	subnavLinks[0].nextElementSibling.classList.add('active')
-	
-	subnavLinks.forEach(subnavLink => subnavLink.addEventListener('click', openAccordion))
-	
-	function openAccordion() {
-		event.preventDefault()
-		removeActiveClass('.nav-sub > li > ul');
-		addActiveClass(event.target.nextElementSibling)
-	}
-}
-
-// carousel
-
-const carouselLinks = document.querySelectorAll('.image-tn a')
-const carousel = document.querySelector('figure img')
-const carouselPara = document.querySelector('figcaption')
-// log(carouselPara)
-carouselLinks.forEach( function(link) {
-	link.addEventListener('click', runCarousel)
-})
-
-function runCarousel() {
 	event.preventDefault()
-	// log(this.getAttribute('href'))
-	// log(event.target.parentElement.getAttribute('href'))
-	const imageHref = this.getAttribute('href')
-	const titleText = this.firstChild.title
-	carouselPara.innerHTML = titleText
-	log(titleText)
-	carousel.setAttribute('src', imageHref)
-	
+	removeActiveClass('.nav-sub > li > ul');
+	addActiveClass(event.target.nextElementSibling)
 }
+
+// Image Carousel
+
+var runCarousel = function (elem) {
+	event.preventDefault()
+	const carousel = document.querySelector('figure img')
+	const carouselPara = document.querySelector('figcaption')
+	const imageHref = elem.parentElement.getAttribute('href')
+	const titleText = elem.title
+	carouselPara.innerHTML = titleText
+	carousel.setAttribute('src', imageHref)
+}
+
+// AJAX
+
+var getData = function () {
+	fetch('https://api.nytimes.com/svc/topstories/v2/travel.json?api-key=d7d88f32a04d4c6aab4e46735441d0ee')
+  .then(response => response.json())
+  .then(json => addContent2(json))
+}
+
+var addContent2 = function (stories) {
+
+	stories = stories.results
+	console.log(stories[0].abstract)
+  document.querySelector('.newsletter h3 a').innerText = stories[5].title;
+	document.querySelector('.newsletter p').innerText = stories[5].abstract;
+
+	var newsItems = document.querySelectorAll('.hentry')
+
+	for (var i = 0; i < 2; i++){
+		newsItems[i].querySelector('a').innerText = stories[i].title
+		newsItems[i].querySelector('p').innerText = stories[i].abstract
+	}
+
+}
+
+
+// var addContent = function (data) {
+// 	document.querySelector('.newsletter h3 a').innerText = data[0].title
+// 	document.querySelector('.newsletter p').innerText = data[0].body
+// }
+
+getData();
 
 // ---- Initialization ---- //
 
-// makeHamburgers();
-accordion();
-videoSwitcher();
+var setEverythingUp = function () {
+	document.querySelector('.btn-list a').classList.add('active');
+	document.querySelector('.nav-sub > li > a').nextElementSibling.classList.add('active')
+	document.querySelector('figure img').setAttribute('src', document.querySelector('.image-tn a').href)
+	document.querySelector('figure figcaption').innerText = document.querySelector('.image-tn a img').title
+}
+
+setEverythingUp()
