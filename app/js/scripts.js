@@ -72,10 +72,10 @@ var runCarousel = function (elem) {
 var getData = function () {
 	fetch('https://api.nytimes.com/svc/topstories/v2/travel.json?api-key=d7d88f32a04d4c6aab4e46735441d0ee')
   .then(response => response.json())
-  .then(json => addContent2(json))
+  .then(json => addContent(json))
 }
 
-var addContent2 = function (stories) {
+var addContent = function (stories) {
 
 	stories = stories.results
 	console.log(stories[0].abstract)
@@ -90,12 +90,6 @@ var addContent2 = function (stories) {
 	}
 
 }
-
-
-// var addContent = function (data) {
-// 	document.querySelector('.newsletter h3 a').innerText = data[0].title
-// 	document.querySelector('.newsletter p').innerText = data[0].body
-// }
 
 getData();
 
