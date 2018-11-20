@@ -1,24 +1,6 @@
 # 1. IX - DOM Scripting
 
-<!-- TOC -->
-
-- [1. IX - DOM Scripting](#1-ix---dom-scripting)
-  - [1.1. Homework](#11-homework)
-  - [1.2. Tooling](#12-tooling)
-  - [1.3. JavaScipt Review](#13-javascipt-review)
-    - [1.3.1. REVIEW: Video Switcher](#131-review-video-switcher)
-    - [1.3.2. REVIEW: JavaScript and CSS for nav-sub.](#132-review-javascript-and-css-for-nav-sub)
-    - [1.3.3. REVIEW: removeActiveClass](#133-review-removeactiveclass)
-  - [1.4. Image Carousel](#14-image-carousel)
-    - [1.4.1. Image Carousel JavaScript](#141-image-carousel-javascript)
-  - [1.5. The Panels (the third and final section)](#15-the-panels-the-third-and-final-section)
-  - [1.6. AJAX](#16-ajax)
-  - [1.7. GIT and GITHUB](#17-git-and-github)
-  - [1.8. Notes](#18-notes)
-    - [1.8.1. Links Smooth Scrolling](#181-links-smooth-scrolling)
-    - [1.8.2. Follow Along](#182-follow-along)
-
-<!-- /TOC -->
+<!-- TOC -->autoauto- [1. IX - DOM Scripting](#1-ix---dom-scripting)auto  - [1.1. Homework](#11-homework)auto  - [1.2. Tooling](#12-tooling)auto  - [1.3. JavaScipt Review](#13-javascipt-review)auto    - [1.3.1. REVIEW: Video Switcher](#131-review-video-switcher)auto    - [1.3.2. REVIEW: JavaScript and CSS for nav-sub.](#132-review-javascript-and-css-for-nav-sub)auto    - [1.3.3. REVIEW: removeActiveClass](#133-review-removeactiveclass)auto  - [1.4. Image Carousel](#14-image-carousel)auto    - [1.4.1. Image Carousel JavaScript](#141-image-carousel-javascript)auto  - [1.5. The Panels (the third and final section)](#15-the-panels-the-third-and-final-section)auto  - [1.6. AJAX](#16-ajax)auto  - [1.7. GIT and GITHUB](#17-git-and-github)auto  - [1.8. Notes](#18-notes)auto    - [1.8.1. Links Smooth Scrolling](#181-links-smooth-scrolling)auto    - [1.8.2. Follow Along](#182-follow-along)autoauto<!-- /TOC -->
 
 ## 1.1. Homework
 
@@ -480,34 +462,49 @@ The HTML5 [time tag](https://www.w3schools.com/tags/tag_time.asp) and datetime a
 
 ```css
 .hentry {
-    ...
-    .published {
-        position: absolute;
-        top: 250px;
-        left: 1rem;
-        display: block;
-        width: 30px;
-        padding: 5px 10px;
-        background-color: $link;
-        font-size: 10px;
-        text-align: center;
-        text-transform: uppercase;
-        color: #fff;
-    }
-    .day {
-        font-size: 26px;
-    }
-    h4 {
-        margin: 0 0 10px 60px;
-        font-size: 20px;
-    }
-    p {
-        margin-left: 60px;
-    }
+  position: relative;
+  float: left;
+  width: 50%;
+  box-sizing: border-box;
+  padding: 1rem;
+  
+  abbr {
+    text-decoration: none;
+  }
+  
+  .published {
+    position: absolute;
+    top: 250px;
+    left: 1rem;
+    display: block;
+    width: 30px;
+    padding: 5px 10px;
+    background-color: $link;
+    font-size: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  
+  .entry-title {
+    margin: 0 0 10px 60px;
+    font-size: 1rem;
+    min-height: 4rem;
+  }
+  
+  p {
+    margin-left: 60px;
+  }
+  
+  .day {
+    font-size: 26px;
+  }
+  
 }
+
 ```
 
-Parent container .hentries is used here.
+Parent container `.hentries` is used here and needs to nbe added to the `<ul>` containing the news items..
 
 Redo the entire design - mobile first:
 
@@ -535,45 +532,48 @@ Redo the entire design - mobile first:
 }
 ```
 
+Try a redesign to better fit the dynamic content.
+
 Final `_panels.scss`:
 
 ```css
 .hentries {
-    display: flex;
-    abbr {
-        text-decoration: none;
-    }
-    .hentry {
-        float: left;
-        box-sizing: border-box;
-        width: 50%;
-        padding: 0 8px;
-        .published {
-            text-align: center;
-            float: left;
-            width: 24%;
-            box-sizing: border-box;
-            display: block;
-            padding: 2px 6px;
-            background-color: $link;
-            font-size: 10px;
-            text-align: center;
-            text-transform: uppercase;
-            color: #fff;
-        }
-        .day {
-            font-size: 32px;
-        }
-        h4 {
-            font-size: 20px;
-        }
-        p {
-            margin-top: 0;
-            float: right;
-            width: 70%;
-            box-sizing: border-box;
-        }
-    }
+  display: flex;
+  abbr {
+      text-decoration: none;
+  }
+  .hentry {
+      width: 50%;
+      &:last-child {
+        margin-left: 1rem;
+      }
+      .published {
+          text-align: center;
+          width: 22%;
+          box-sizing: border-box;
+          display: block;
+          padding: 2px 6px;
+          background-color: $link;
+          font-size: 0.875rem;
+          text-align: center;
+          text-transform: uppercase;
+          color: #fff;
+      }
+      .day {
+          font-size: 2rem;
+      }
+      .month {
+        display: block;
+      }
+      h4 {
+          font-size: 20px;
+      }
+      p {
+          margin-top: 0;
+          float: right;
+          width: 72%;
+      }
+  }
 }
 ```
 
@@ -701,6 +701,13 @@ var addContent2 = function (stories) {
 	}
 
 }
+```
+
+```js
+	var specialOffers = document.querySelector('.offers')
+	console.log(specialOffers)
+	specialOffers.querySelector('h3').textContent = stories[10].title
+	specialOffers.querySelector('p').textContent = stories[10].abstract
 ```
 
 
