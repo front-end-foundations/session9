@@ -89,6 +89,11 @@ var addContent = function (stories) {
 		newsItems[i].querySelector('p').innerText = stories[i].abstract
 	}
 
+	var specialOffers = document.querySelector('.offers')
+	specialOffers.querySelector('h3 a').innerText = stories[10].title;
+	specialOffers.querySelector('p').innerText = stories[10].abstract;
+	// console.log(specialOffers)
+
 }
 
 getData();
